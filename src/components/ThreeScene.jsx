@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, Stars, useTexture, Icosahedron } from '@react-three/drei';
+import { Points, PointMaterial, Stars, Icosahedron } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
+import ISS from './ISS';
+import Astronauts from './Astronauts';
 
 function StarField(props) {
     const ref = useRef();
@@ -59,11 +61,13 @@ export default function ThreeScene() {
             <StarField />
             <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
 
-            {/* Lights for the planet */}
+            {/* Lights */}
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} intensity={1} />
 
             <FloatingPlanet />
+            <ISS />
+            <Astronauts />
         </group>
     );
 }
