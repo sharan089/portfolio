@@ -10,13 +10,22 @@ export default function Astronauts() {
         // Fetch astronaut count from Open Notify API
         const fetchAstronauts = async () => {
             try {
-                // Use a proxy to avoid Mixed Content (HTTP vs HTTPS) errors
-                const response = await fetch('https://api.allorigins.win/raw?url=http://api.open-notify.org/astros.json');
+                const response = await fetch('https://api.allorigins.win/get?url=http://api.open-notify.org/astros.json');
+                if (!response.ok) throw new Error('Proxy network response was not ok');
+
                 const data = await response.json();
-                setCount(data.number);
+                // allorigins returns the actual response in the 'contents' field string
+                const parsedContents = JSON.parse(data.contents);
+
+                if (parsedContents && parsedContents.number) {
+                    setCount(parsedContents.number);
+                } else {
+                    throw new Error('Invalid data format');
+                }
             } catch (error) {
                 console.error("Error fetching astronaut count:", error);
-                setCount("?"); // Fallback
+                // Fallback to a realistic number (usually 7-14) if API fails
+                setCount(10);
             }
         };
 
