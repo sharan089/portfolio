@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Text, Sphere, Html } from '@react-three/drei';
+import { Text, Sphere } from '@react-three/drei';
 
 export default function Astronauts() {
     const [count, setCount] = useState(null);
