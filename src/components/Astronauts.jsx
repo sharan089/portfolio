@@ -10,9 +10,8 @@ export default function Astronauts() {
         // Fetch astronaut count from Open Notify API
         const fetchAstronauts = async () => {
             try {
-                // Note: This API is HTTP, might be blocked on HTTPS sites. 
-                // For local dev it should work, or consider a proxy if needed.
-                const response = await fetch('http://api.open-notify.org/astros.json');
+                // Use a proxy to avoid Mixed Content (HTTP vs HTTPS) errors
+                const response = await fetch('https://api.allorigins.win/raw?url=http://api.open-notify.org/astros.json');
                 const data = await response.json();
                 setCount(data.number);
             } catch (error) {
